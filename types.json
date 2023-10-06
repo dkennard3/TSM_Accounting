@@ -1,0 +1,9 @@
+{
+    "purchases": ["varchar","varchar","Integer","Integer",
+                "Float(2)","varchar","varchar","date","varchar"],
+    "sales": ["varchar","varchar","Integer","Integer",
+                "Float(2)","varchar","varchar","date","varchar"],
+    "expenses": ["varchar","Float(2)","varchar","varchar","date"],
+    "income": ["varchar","Float(2)","varchar","varchar","date"],
+    "expired": ["varchar","varchar","Integer","Integer","varchar","date"]
+}
