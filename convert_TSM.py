@@ -3,9 +3,7 @@ import re
 import json
 from datetime import datetime
 from unidecode import unidecode
-import jedi
 
-jedi.get_default_environment()
 '''
 1) convert unix Timestamp to datetime obj yyyy-mm-dd
 2) remove colons and dashes, replace w/ empty '' string (except the date)
@@ -17,7 +15,7 @@ try:
     export_file = sys.argv[1]
     table_name = sys.argv[2]
 except IndexError:
-    print('usage: python getRecent.py TSM_csv_export_file desired_table_name')
+    print('usage: python convert_TSM.py TSM_csv_export_file desired_table_name')
     sys.exit(0)
 else:
     if re.findall(r'\d', table_name) or not table_name.strip():
@@ -30,18 +28,14 @@ with open(export_file,'r') as f:
 
 headers = lines[0].rstrip('\n').split(',') 
 with open('types.json', 'r') as f:
-    types = json.load(f, types)
-
-
-
-
+    types = json.load(f)
 
 headLine = f"create or replace table {table_name} (\n\t{headers}"
 
 start = f'insert into {table_name} values ('
 end = f');'
 
-with open(f'{table_name}_from_{export_file.split(".")[0]}.txt', 'w') as f:
+with open(f'{table_name}.txt', 'w') as f:
     for line in lines:
         tmp = []
         line = line.replace(':', '')
